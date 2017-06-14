@@ -1,0 +1,23 @@
+inherit python-wheel
+
+NAME="python-certifi"
+VERSION=2017.4.17
+RELEASE=1
+CATEGORY="Python"
+SUMMARY="Python module for location the CA bundle"
+DESCRIPTION="This version of certifi locates the system Root Certificates
+for validating the trustworthiness of SSL certificates while verifying the
+identity of TLS hosts. It has been extracted from the Requests project."
+
+PATCH_URI="http://pkgs.fedoraproject.org/cgit/rpms/python-certifi.git/plain/certifi-2016.9.26-remove-bundle-cert.patch"
+
+ARCH=noarch
+
+REQUIRES="ca-certificates"
+
+CYGPORT_USE_UNSTABLE_API=1
+src_patch_hook() {
+	rm -f certifi/*.pem
+	sed -i -e '/\.pem$/d' certifi.egg-info/SOURCES.txt
+	sed -i -e 's/Fedora/Cygwin/g' certifi/core.py
+}
