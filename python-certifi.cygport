@@ -1,7 +1,7 @@
 inherit python-wheel
 
 NAME="python-certifi"
-VERSION=2017.4.17
+VERSION=2018.10.15
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Python module for location the CA bundle"
@@ -9,11 +9,13 @@ DESCRIPTION="This version of certifi locates the system Root Certificates
 for validating the trustworthiness of SSL certificates while verifying the
 identity of TLS hosts. It has been extracted from the Requests project."
 
-PATCH_URI="http://pkgs.fedoraproject.org/cgit/rpms/python-certifi.git/plain/certifi-2016.9.26-remove-bundle-cert.patch"
+PATCH_URI="https://src.fedoraproject.org/cgit/rpms/python-certifi.git/plain/certifi-2018.10.15-use-system-cert.patch"
 
 ARCH=noarch
 
-REQUIRES="ca-certificates"
+python27_certifi_REQUIRES="ca-certificates"
+python36_certifi_REQUIRES="ca-certificates"
+python37_certifi_REQUIRES="ca-certificates"
 
 CYGPORT_USE_UNSTABLE_API=1
 src_patch_hook() {
